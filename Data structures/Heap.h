@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 
 template <class T, class Cmp = std::less<T>>
+
 class Heap {
   Cmp compare;
 
