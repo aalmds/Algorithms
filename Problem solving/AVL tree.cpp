@@ -8,10 +8,10 @@ using Key = int;
 
 struct Node {
   Key key;
-  int height;
-  int size;
   Node *left;
   Node *right;
+  int height;
+  int size;
 };
 
 struct AVL {
@@ -66,10 +66,8 @@ Node *leftRotate(Node *rt){
   rt->height = max(h(rt->left), h(rt->right)) + 1;
   r->height = max(h(r->left), h(r->right)) + 1;
 
-  {
-    rt->size = getSize(rt->left) + getSize(rt->right) + 1;
-    r->size = getSize(r->left) + getSize(r->right) + 1;
-  }
+  rt->size = getSize(rt->left) + getSize(rt->right) + 1;
+  r->size = getSize(r->left) + getSize(r->right) + 1;
 
   return r;
 }
@@ -80,13 +78,12 @@ Node *rightRotate(Node *rt){
 
   l->right = rt;
   rt->left = lr;
+
   rt->height = max(h(rt->left), h(rt->right)) + 1;
   l->height = max(h(l->left), h(l->right)) + 1;
 
-  {
-    rt->size = getSize(rt->left) + getSize(rt->right) + 1;
-    l->size = getSize(l->left) + getSize(l->right) + 1;
-  }
+  rt->size = getSize(rt->left) + getSize(rt->right) + 1;
+  l->size = getSize(l->left) + getSize(l->right) + 1;
 
   return l;
 }
@@ -107,23 +104,19 @@ Node *insertHelp(Node *rt, Key k) {
   int balance = getBalance(rt);
 
   if (balance < -1 && k >= rt->right->key) {
-    // Right -> right
     return leftRotate(rt);
   }
 
   if (balance > 1 && k < rt->left->key) {
-    // Left -> left
     return rightRotate(rt);
   }
 
   if (balance > 1 && k >= rt->left->key) {
-    // Right -> left
     rt->left = leftRotate(rt->left);
     return rightRotate(rt);
   }
 
   if (balance < -1 && k < rt->right->key) {
-    // Left -> right
     rt->right = rightRotate(rt->right);
     return leftRotate(rt);
   }
@@ -185,6 +178,6 @@ int main() {
       findIndex(avl.root, key, count);
     }
   }
-
+  
   return 0;
 }
