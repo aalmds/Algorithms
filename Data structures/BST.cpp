@@ -11,7 +11,7 @@ struct Node {
 };
 
 struct BST {
-  BSTNode* root;
+  Node* root;
   int nodeCount;
 };
 
